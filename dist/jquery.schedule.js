@@ -86,10 +86,71 @@
 		},
 
 		render: function () {
-			var element =  $('<div class="tasks" />'),
-				output = this.renderTasks(element, this.settings.tasks, 0);
+			var header  = this.renderHeader($('<div class="header" />'), this.settings.tasks),
+				tasks   = this.renderTasks($('<div class="tasks" />'), this.settings.tasks, 0),
+				days    = this.getNumberOfDays(this.settings.firstDate, this.settings.lastDate),
+				size    = this.settings.size + 1,
+				element = $('<div class="content" />');
 
-			$(this.element).html(output);
+			element.append(header).append(tasks);
+			element.css('width', (days + 1) * size + 162);
+
+			$(this.element).append(element);
+		},
+
+		renderHeader: function ( element, tasks ) {
+			var months = this.renderMonths(tasks);
+
+			element.append(months);
+
+			return element;
+		},
+
+		renderYears: function () {
+			
+		},
+
+		renderMonths: function ( tasks ) {
+			var day        = new Date(this.settings.firstDate.getTime()),
+				monthDay   = new Date(this.settings.firstDate.getFullYear(), this.settings.firstDate.getMonth()+1, 0),
+				lastDate   = new Date(this.settings.lastDate.getFullYear(), this.settings.lastDate.getMonth()+1, 0),
+				firstDay   = null,
+				lastDay    = null,
+				montDays   = 0,
+				size       = this.settings.size + 1,
+				element    = $('<div class="months" />');
+
+
+			while (lastDate >= monthDay)  {
+				var _element = $('<div class="month">'+ (monthDay.getMonth()+1) +'</div>');
+
+				if (this.settings.firstDate.getMonth() === monthDay.getMonth()) {
+					firstDay = this.settings.firstDate.getDate();
+				} else {
+					firstDay = 1;
+				}
+
+				if (this.settings.lastDate.getMonth() === monthDay.getMonth()) {
+					lastDay = this.settings.lastDate.getDate();
+				} else {
+					lastDay = monthDay.getDate();
+				}
+
+				montDays = lastDay - firstDay + 1;
+				element.append(_element.css('width', montDays * size - 1));
+
+				monthDay.setDate(1);
+				monthDay.setMonth(monthDay.getMonth() + 2);
+				monthDay.setDate(0);
+			
+			}
+
+
+			return element;
+		},
+
+		renderWeeks: function () {
+			
 		},
 
 		renderTasks: function ( element, tasks, level ) {
@@ -111,18 +172,6 @@
 			return element;
 		},
 
-		renderYears: function () {
-			
-		},
-
-		renderMonths: function () {
-			
-		},
-
-		renderWeeks: function () {
-			
-		},
-
 		renderDays: function ( task ) {
 			var day     = new Date(this.settings.firstDate.getTime()),
 				days    = this.getNumberOfDays(this.settings.firstDate, this.settings.lastDate),
@@ -138,10 +187,9 @@
 			}
 
 			if (end > 0) {
-				var _element = $('<div class="bar"></div>').css({
-					left: (start * size) + 2,
-					width: ((end - start + 1) * size) - 3
-				});
+				var _element = $('<div class="bar"></div>')
+					.css('left', (start * size) + 2)
+					.css('width', ((end - start + 1) * size) - 3);
 
 				element.prepend(_element);
 			}

@@ -10,11 +10,31 @@
 			.schedule {
 				font-size: 11px;
 				margin: 20px;
+				overflow: auto;
+			}
+
+			.header {
+				border-left: 1px solid #eee;
+				border-top: 1px solid #eee;
+			}
+
+			.months {
+				margin-left: 160px;
+				border-left: 1px solid #eee;
+				height: 22px;
+				position: relative;
+			}
+
+			.month {
+				border-right: 1px solid #eee;
+				float: left;
+				height: 22px;
+				line-height: 22px;
+				text-align: center;
 			}
 
 			.task {
 				height: 23px;
-				overflow: hidden;
 			}
 
 			.task:first-child {
@@ -28,7 +48,7 @@
 				line-height: 22px;
 				height: 22px;
 				padding-left: 10px;
-				width: 100px;
+				width: 150px;
 			}
 
 			.task:first-child .name {
@@ -36,7 +56,7 @@
 			}
 
 			.days {
-				margin-left: 111px;
+				margin-left: 161px;
 				height: 22px;
 				position: relative;
 			}
@@ -44,7 +64,6 @@
 			.day {
 				border-left: 1px solid #eee;
 				border-bottom: 1px solid #eee;
-				display: block;
 				float: left;
 				height: 22px;
 				width: 22px;
@@ -110,7 +129,7 @@
 					{
 						'name': 'Month 2',
 						'from': '2013-07-01',
-						'to': '2013-07-30',
+						'to': '2013-09-30',
 						'tasks': [
 							{
 								'name': 'Week 1',
