@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Boilerplate</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script src="../dist/jquery.schedule.js"></script>
+
+		<style>
+
+			.schedule {
+				font-size: 11px;
+				margin: 20px;
+			}
+
+			.task {
+				height: 23px;
+				overflow: hidden;
+			}
+
+			.task:first-child {
+				height: 24px;
+			}
+
+			.name {
+				border-left: 1px solid #eee;
+				border-bottom: 1px solid #eee;
+				float: left;
+				line-height: 22px;
+				height: 22px;
+				padding-left: 10px;
+				width: 100px;
+			}
+
+			.task:first-child .name {
+				border-top: 1px solid #eee;
+			}
+
+			.days {
+				margin-left: 111px;
+				height: 22px;
+				position: relative;
+			}
+
+			.day {
+				border-left: 1px solid #eee;
+				border-bottom: 1px solid #eee;
+				display: block;
+				float: left;
+				height: 22px;
+				width: 22px;
+			}
+
+			.task:first-child .day {
+				border-top: 1px solid #eee;
+			}
+
+			.day:last-child {
+				border-right: 1px solid #eee;
+			}
+
+			.bar {
+				background-color: #dfdfdf;
+				height: 20px;
+				position: absolute;
+				top: 1px;
+
+				border-radius: 3px;
+			}
+
+			.task:first-child .bar {
+				top: 2px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="schedule" class="schedule">
+			
+		</div>
+		<script>
+			$(function() {
+				var tasks = [
+					{
+						'name': 'Month 1',
+						'from': '2013-06-01',
+						'to': '2013-06-30',
+						'tasks': [
+							{
+								'name': 'Week 1',
+								'from': '2013-06-01',
+								'to': '2013-06-07',
+							},
+							{
+								'name': 'Week 2',
+								'from': '2013-06-08',
+								'to': '2013-06-15'
+							},
+							{
+								'name': 'Week 3',
+								'from': '2013-06-16',
+								'to': '2013-06-23'
+							},
+							{
+								'name': 'Week 4',
+								'from': '2013-06-24',
+								'to': '2013-06-30'
+							},
+						]
+					},
+					{
+						'name': 'Month 2',
+						'from': '2013-07-01',
+						'to': '2013-07-30',
+						'tasks': [
+							{
+								'name': 'Week 1',
+								'from': '2013-07-01',
+								'to': '2013-07-07'
+							},
+							{
+								'name': 'Week 2',
+								'from': '2013-07-08',
+								'to': '2013-07-15'
+							},
+							{
+								'name': 'Week 3',
+								'from': '2013-07-16',
+								'to': '2013-07-23'
+							},
+							{
+								'name': 'Week 4',
+								'from': '2013-07-24',
+								'to': '2013-07-30'
+							},
+						]
+					}
+				];
+
+				$("#schedule").schedule({
+					tasks: tasks
+				});
+			});
+		</script>
+	</body>
+</html>
