@@ -96,6 +96,15 @@
 			element.css('width', (days + 1) * size + 162);
 
 			$(this.element).append(element);
+			$(this.element).find('.task').on('click', function() {
+				if ($(this).is('.opened')) {
+					$('.task-' + $(this).data('id')).slideUp('fast');
+					$(this).removeClass('opened').addClass('closed');
+				} else {
+					$('.task-' + $(this).data('id')).slideDown('fast');
+					$(this).removeClass('closed').addClass('opened');
+				}
+			});
 		},
 
 		renderHeader: function ( element, tasks ) {
@@ -153,10 +162,11 @@
 			
 		},
 
-		renderTasks: function ( element, tasks, level ) {
+		renderTasks: function ( element, tasks, level, tree ) {
 			for (x in tasks) {
 				var task     = tasks[x],
-					_element = $('<div class="task" />');
+					_tree    = tree == undefined ? x : tree + '-' + x,
+					_element = $('<div class="task' + (tree ? ' task-' + tree : '') + ' opened" data-id="' + _tree + '" />');
 
 				_element.append($('<div class="name">' + task.name + '</div>').css('textIndent', level * 10));
 				_element.append(this.renderDays(task));
@@ -165,7 +175,7 @@
 
 				// go subtasks
 				if (task.tasks !== undefined && task.tasks.length > 0) {
-					this.renderTasks(element, task.tasks, level + 1);
+					this.renderTasks(element, task.tasks, level + 1, _tree);
 				}
 			}
 
